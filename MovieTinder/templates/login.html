@@ -1,7 +1,123 @@
 <!DOCTYPE html>
-
 <html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            background-image: url("../static/images/blurred.png");
+            background-color: #333;
+            font-family: Arial, Helvetica, sans-serif;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* styling for main content and forms */
+        .container {
+            padding: 20px;
+            background-color: #313131;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,8);
+            width: 300px;
+            margin-bottom: 16px;
+        }
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #cccccc;
+            box-sizing: border-box;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        button {
+            background-color: #ff4500;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+            transition: background-color 0.3s ease; 
+        }
+
+        button:hover {
+            background-color: #e63900;
+        }
+
+        /* container for cancel */
+        .container:last-child {
+            background-color: transparent;
+            box-shadow: center;
+            text-align: center;
+            height: 95px;
+        }
+
+        p {
+            color: #848484;
+        }
+        
+        /* link styling */
+        a {
+            color: #2fff00;
+        }
+
+        a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* cancel button */
+        .cancelbtn {
+            background-color: #666;
+            color: white;
+        }
+
+        .cancelbtn:hover {
+            background-color: #444;
+        }
+
+    </style>
+</head>
     <body>
-        <p>Login</p>
+        <h2>Login Page</h2>
+
+        <form action="/submit_login" method="post">
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <button type="submit">Login</button>
+
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <a href="/">
+                    <button type="button" class="cancelbtn">Cancel</button>
+                </a>
+                <p>Don't have an account? <a href="\register">Create account</a></p>
+            </div>
+        </form>
+            
+        </div>
     </body>
 </html>
