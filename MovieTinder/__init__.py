@@ -12,8 +12,11 @@ conn = psycopg2.connect(db)
 bcrypt = Bcrypt(app)
 
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+login_manager.init_app(app)
+login_manager.login_view = 'Login.login'
 login_manager.login_message_category = 'info'
 
 from MovieTinder.Login.routes import Login
+from MovieTinder.Users.routes import Users
 app.register_blueprint(Login)
+app.register_blueprint(Users)
