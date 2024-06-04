@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, SearchField
 from wtforms.validators import DataRequired
 
 class UserLoginForm(FlaskForm):
@@ -22,3 +22,10 @@ class UserChangePassForm(FlaskForm):
     password = PasswordField('New password', validators=[DataRequired()])
     password_confirmed = PasswordField('Confirm new password', validators=[DataRequired()])
     submit = SubmitField('Update password')
+
+class UserMovieReactForm(FlaskForm):
+    like = SubmitField('Like')
+    dislike = SubmitField('Dislike')
+
+class UserSearchForm(FlaskForm):
+    search = SearchField('')
