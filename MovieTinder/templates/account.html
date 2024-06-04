@@ -1,7 +1,82 @@
-<!DOCTYPE html>
+{% extends "base_auth.html" %}
 
-<html>
-    <body>
-        <p>Account</p>
-    </body>
-</html>
+{% block content %}
+<p>Account</p>
+
+<form action="" method="POST">
+    {{ username_form.hidden_tag() }}
+    <div class="container">
+
+        <div class="form-group">
+            {{ username_form.username.label(class="form-control-label") }}
+            {% if username_form.username.errors %}
+                {{ username_form.username(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in username_form.username.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ username_form.username(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ username_form.username_confirmed.label(class="form-control-label") }}
+            {% if username_form.username_confirmed.errors %}
+                {{ username_form.username_confirmed(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in username_form.username_confirmed.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ username_form.username_confirmed(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ username_form.submit(class="btn btn-outline-info") }}
+        </div>
+    </div>
+</form>
+
+<form action="" method="POST">
+    {{ pass_form.hidden_tag() }}
+    <div class="container">
+
+        <div class="form-group">
+            {{ pass_form.password.label(class="form-control-label") }}
+            {% if pass_form.password.errors %}
+                {{ pass_form.password(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in pass_form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ pass_form.password(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ pass_form.password_confirmed.label(class="form-control-label") }}
+            {% if pass_form.password_confirmed.errors %}
+                {{ pass_form.password_confirmed(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in pass_form.password_confirmed.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ pass_form.password_confirmed(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ pass_form.submit(class="btn btn-outline-info") }}
+        </div>
+    </div>
+</form>
+
+{% endblock content %}

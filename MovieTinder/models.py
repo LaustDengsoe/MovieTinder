@@ -40,3 +40,35 @@ def select_User(username):
     user = User(cur.fetchone()) if cur.rowcount > 0 else None;
     cur.close()
     return user
+
+def insert_User(username, password):
+    cur = conn.cursor()
+    sql = """
+    INSERT INTO Users(username, password)
+    VALUES (%s, %s)
+    """
+    cur.execute(sql, (username, password,))
+    conn.commit()
+    cur.close()
+
+def update_Username(id, username):
+    cur = conn.cursor()
+    sql = """
+    UPDATE Users
+    SET username = %s
+    WHERE id = %s
+    """
+    cur.execute(sql, (username, id,))
+    conn.commit()
+    cur.close()
+
+def update_Pass(id, password):
+    cur = conn.cursor()
+    sql = """
+    UPDATE Users
+    SET password = %s
+    WHERE id = %s
+    """
+    cur.execute(sql, (password, id,))
+    conn.commit()
+    cur.close()
