@@ -1,0 +1,28 @@
+{% extends "base_auth.html" %}
+{% block content %}
+<p>Friends</p>
+
+<h2>Search Users</h2>
+<form method="get" action="">
+    <div class="form-group">
+        {{ form.search.label(class="form-control-label") }}
+        {% if form.search.errors %}
+            {{ form.search(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.search.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.search(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+</form>
+
+<h2>All your friends</h2>
+<ul>
+    {% for friend in friends %}
+    <li>{{ friend[0] }}</li>
+    {% endfor %}
+</ul>
+{% endblock content %}

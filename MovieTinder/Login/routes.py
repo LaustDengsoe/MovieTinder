@@ -13,14 +13,14 @@ def frontpage():
 @Login.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('Login.home'))
+        return redirect(url_for('Users.home'))
 
     form = UserLoginForm()
     if form.validate_on_submit():
         user = select_User(form.username.data)
-        if user != None and bcrypt.check_password_hash(user[2], form.password.data):
+        if user != None and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
-            return redirect(url_for('Login.home'))
+            return redirect(url_for('Users.home'))
         else:
             flash('Login unsuccessful. Please check the username and password', 'danger')
 
@@ -29,7 +29,7 @@ def login():
 @Login.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('Login.home'))
+        return redirect(url_for('Users.home'))
 
     form = UserRegisterForm()
     if form.validate_on_submit():
@@ -44,13 +44,8 @@ def register():
                 insert_User(username, password)
                 user = select_User(username)
                 login_user(user)
-                return redirect(url_for('Login.home'))
+                return redirect(url_for('Users.home'))
             else:
                 flash('Passwords do not match!', 'danger')
 
     return render_template('register.html', form = form)
-
-@Login.route("/home")
-@login_required
-def home():
-    return render_template('home.html')
