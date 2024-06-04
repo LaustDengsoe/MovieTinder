@@ -1,3 +1,3 @@
-from MovieTinder.init import app
+from MovieTinder import app
 if __name__ == '__main__':
     app.run(debug=True)
