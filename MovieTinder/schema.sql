@@ -17,12 +17,17 @@ CREATE TABLE IF NOT EXISTS HasFriends(
 
 CREATE TABLE IF NOT EXISTS Movies(
     id INT GENERATED ALWAYS AS IDENTITY,
+    imdb_id VARCHAR(120),
     title VARCHAR(120),
     year INT,
-    poster VARCHAR(120),
     summary TEXT,
     PRIMARY KEY (id)
 );
+
+COPY Movies(imdb_id,title,year,summary)
+FROM 'C:\Users\holge\Documents\Datalogi\DIS\csv_filer\movies_shaved.csv'
+DELIMITER ','
+CSV HEADER;
 
 CREATE TABLE IF NOT EXISTS Likes(
 	user_id INT,
