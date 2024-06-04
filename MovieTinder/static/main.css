@@ -1,7 +1,151 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    font-family: monospace;
+    white-space: pre;
+}
 p {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     white-space: pre;
-    font-size: 40px;
     font-weight: bold;
+}
+.frontpage {
+background-image: url("../static/images/frontpage1.webp");
+background-color: #333;
+font-family: Arial, Helvetica, sans-serif;
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+color: white;
+height: 100vh;
+margin: 0;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+#top button {
+    margin: 0;
+}
+
+.link_box {
+    
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    width: 200px; 
+    padding: 12px 18px;
+    height: 25px;
+    margin-top: 40px;
+    border-radius: 30px; 
+    background-color: #ff4500; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 4px; 
+    transition: background-color 0.3s ease; 
+    text-decoration: none; 
+        
+    
+}
+.link_box:hover {
+    background-color: #e63900; 
+    }
+
+
+
+
+
+.login-page {
+    background-image: url("../static/images/blurred.png");
+    background-color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* styling for main content and forms */
+.container {
+    padding: 20px;
+    background-color: #313131;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,8);
+    width: 300px;
+    margin-bottom: 16px;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+}
+
+.btn .btn-outline-info {
+    background-color: #ff4500;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; 
+}
+
+.btn .btn-outline-info:hover {
+    background-color: #e63900;
+}
+
+.no-account {
+    color: #666;
+}
+
+/* link styling */
+a {
+    color: #e63900;
+}
+
+a:hover {
+    color: #a5a5a5;
+    text-decoration: underline;
+}
+
+/* cancel button */
+.cancelbtn {
+    background-color: #666;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; 
+}
+
+.cancelbtn:hover {
+    background-color: #444;
 }
