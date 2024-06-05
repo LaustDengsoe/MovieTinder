@@ -13,12 +13,9 @@
 <form action="" method="POST">
     {{ form.hidden_tag() }}
     <input type="hidden" name="movie_id" value="{{ movie.id }}">
-    <div>
-        {{ form.like() }}
-    </div>
-
-    <div>
-        {{ form.dislike() }}
+    <div class="form-group button-group" >
+        {{ form.dislike(class="btn btn-outline-info") }}
+        {{ form.like(class="btn btn-outline-info") }}
     </div>
 </form>
 {% endblock content %}

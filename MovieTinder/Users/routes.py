@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for, session
 from flask_login import login_required, current_user, logout_user
-from MovieTinder.forms import UserChangeNameForm, UserChangePassForm, UserMovieReactForm, UserSearchForm, UserRemoveFriendForm, UserAddFriendForm, UserSeeMatchesForm
+from MovieTinder.forms import *
 from MovieTinder.models import *
 from MovieTinder import bcrypt
 
@@ -49,7 +49,8 @@ def home():
         if react_form.like.data:
             insert_Like(current_user[0], movie_id)
         elif react_form.dislike.data:
-            print('dislike')
+            insert_Dislike(current_user[0], session['movie_id'])
+            
         return redirect(url_for('Users.home'))
 
     return render_template('home.html', image_src = poster, movie=movie, form = react_form)
@@ -100,6 +101,15 @@ def matches():
     movies = [Movie(movie) for movie in session.get('movies')] if session.get('movies') != None else None
     return render_template('matches.html', friends=friends, matches_form=matches_form,
                            match_friend = friend, movies=movies)
+
+@Users.route("/likes", methods=['GET', 'POST'])
+@login_required
+def likes():
+    movies = select_all_liked_movies(current_user[0]) 
+    print(movies)
+        
+    return render_template('likes.html', movies=movies)
+
 
 @Users.route("/logout", methods=['GET', 'POST'])
 @login_required
