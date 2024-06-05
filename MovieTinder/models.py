@@ -5,10 +5,9 @@ from psycopg2 import sql
 
 class User(tuple, UserMixin):
     def __init__(self, user_data):
-        self.username = user_data[0]
-        self.password = user_data[1]
-        self.id = user_data[2]
-        self.role = "user"
+        self.id = user_data[0]
+        self.username = user_data[1]
+        self.password = user_data[2]
 
     def get_id(self):
        return (self.id)
@@ -31,15 +30,15 @@ class Movie(tuple):
        return (self.id)
 
 @login_manager.user_loader
-def load_user(password):
+def load_user(id):
     cur = conn.cursor()
 
     user_sql = sql.SQL("""
     SELECT * FROM Users
-    WHERE password = %s
+    WHERE id = %s
     """)
 
-    cur.execute(user_sql, (password,))
+    cur.execute(user_sql, (id,))
 
     if cur.rowcount > 0:
         return User(cur.fetchone())
@@ -130,13 +129,13 @@ def select_Friends(user_id):
     cur.close()
     return users
 
-def select_User(username):
+def select_Users_Search(user_id, regex):
     cur = conn.cursor()
     sql = """
-    SELECT * FROM Users
-    WHERE username = %s
+    SELECT username, id FROM Users
+    WHERE username ~ %s AND id != %s
     """
-    cur.execute(sql, (username,))
-    user = User(cur.fetchone()) if cur.rowcount > 0 else None;
+    cur.execute(sql, (regex, user_id,))
+    users = cur.fetchall() if cur.rowcount > 0 else None;
     cur.close()
-    return user
+    return users

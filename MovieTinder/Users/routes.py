@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for, session
-from flask_login import login_required, current_user
-from MovieTinder.forms import UserChangeNameForm, UserChangePassForm, UserMovieReactForm, UserSearchForm
-from MovieTinder.models import select_User, update_Username, update_Pass, select_new_Movie, insert_Like, select_Friends, select_Users
+from flask_login import login_required, current_user, logout_user
+from MovieTinder.forms import UserChangeNameForm, UserChangePassForm, UserMovieReactForm, UserSearchForm, UserFriendRemoveMatchForm
+from MovieTinder.models import select_User, update_Username, update_Pass, select_new_Movie, insert_Like, select_Friends, select_Users_Search
 from MovieTinder import bcrypt
 
 Users = Blueprint('Users', __name__)
@@ -41,23 +41,20 @@ def account():
 @login_required
 def home():
     movie = select_new_Movie(current_user[0])
-    poster = f'static/images/posters/poster_{movie.imdb_id}.jpg'
-    title = movie.title
-    year = movie.year
-    summary = movie.summary
+    poster = f'static/images/posters/poster_{movie.imdb_id}.jpg' if movie != None else None
 
     react_form = UserMovieReactForm()
     if react_form.validate_on_submit():
-        if 'like' in request.form:
+        if react_form.like.data:
             insert_Like(current_user[0], session['movie_id'])
-        elif 'dislike' in request.form:
+        elif react_form.dislike.data:
             print('dislike')
         return redirect(url_for('Users.home'))
 
-    session['movie_id'] = movie.id
+    
+    session['movie_id'] = movie.id if movie != None else None
 
-    return render_template('home.html', image_src = poster, movie_title = title, movie_year = year,
-                            movie_summary = summary, form = react_form)
+    return render_template('home.html', image_src = poster, movie=movie, form = react_form)
 
 @Users.route("/friends", methods=['GET', 'POST'])
 @login_required
@@ -65,9 +62,25 @@ def friends():
     
     search_form = UserSearchForm()
     search_query = request.args.get('search')
-    if search_query and len(search_query) >= 4:
-        print('Search!')
+    if search_query:
+        users = select_Users_Search(current_user[0], f'^{search_query}.*')
+    else:
+        users = None
+
+    remove_match_form = UserFriendRemoveMatchForm()
+    if remove_match_form.validate_on_submit():
+        if remove_match_form.remove.data:
+            print(remove_match_form.user_id.data)
+        elif remove_match_form.matches.data:
+            print(f'Matches {remove_match_form.user_id.data}')
+
+        return redirect(url_for('Users.friends'))    
     
     friends = select_Friends(current_user[0])
-    return render_template('friends.html', friends=friends, form=search_form)
+    return render_template('friends.html', friends=friends, form=search_form, users=users, friend_form=remove_match_form)
 
+@Users.route("/logout", methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('Login.frontpage'))

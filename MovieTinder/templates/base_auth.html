@@ -23,6 +23,10 @@
               {% endif %}
             {% endwith %}
           </div>
+          
+        <form action="/logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
     </head>
     <body>
         {% block content %}
