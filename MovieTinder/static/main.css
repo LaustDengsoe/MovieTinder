@@ -3,18 +3,38 @@ html, body {
     margin: 0;
     padding: 0;
 }
+.register {
+    background-image: url("../static/images/blurred.png");
+    background-color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 h1 {
     text-align: center;
     font-family: monospace;
     white-space: pre;
 }
+
 p {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     white-space: pre;
     font-weight: bold;
+
 }
+
+
+
 .frontpage {
 background-image: url("../static/images/frontpage1.webp");
 background-color: #333;
@@ -60,9 +80,6 @@ align-items: center;
     }
 
 
-
-
-
 .login-page {
     background-image: url("../static/images/blurred.png");
     background-color: #333;
@@ -90,6 +107,19 @@ align-items: center;
     width: 300px;
     margin-bottom: 16px;
 }
+
+.cancelbtn {
+    background-color: #666;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
 
 input[type=text], input[type=password] {
     width: 100%;
@@ -134,18 +164,8 @@ a:hover {
 }
 
 /* cancel button */
-.cancelbtn {
-    background-color: #666;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    border-radius: 4px;
-    transition: background-color 0.3s ease; 
-}
 
 .cancelbtn:hover {
     background-color: #444;
 }
+
