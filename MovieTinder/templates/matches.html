@@ -3,35 +3,45 @@
 <p>Matches</p>
 
 <h2>Your friends</h2>
-<ul>
-    {% if friends %}
-    {% for friend in friends %}
-    <li>
-        {{ friend.username }}
-        <form action="" method="POST">
-            {{ matches_form.hidden_tag() }}
-            <input type="hidden" name="user_id" value="{{ friend.id }}">
-            {{ matches_form.see_matches() }}
-        </form>
-    </li>
-    {% endfor %}
-    {% else %}
-    <li>No friends!</li>
-    {% endif %}
-</ul>
+<div class="container">
+    <ul class="user-list">
+        {% if friends %}
+        {% for friend in friends %}
+        <li>
+            <div class="user-item">
+                <span>
+                    {{ friend.username }}
+                </span>
+                <form action="" method="POST">
+                    {{ matches_form.hidden_tag() }}
+                    <input type="hidden" name="user_id" value="{{ friend.id }}">
+                    {{ matches_form.see_matches(class="btn btn-outline-account") }}
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+        {% else %}
+        <li>No friends!</li>
+        {% endif %}
+    </ul>
+</div>
 
 {% if match_friend %}
 <h2>Your matches with {{ match_friend.username }} </h2>
+<div class="container">
+    <ul class="movie-list">
+        {% if movies %}
+        {% for movie in movies %}
+        <li>
+            <div class="movie-item">
+                <img src="static/images/posters/poster_{{ movie.imdb_id }}.jpg">
+                <p>{{ movie.title }} ({{ movie.year }})</h1>
+                <p>{{ movie.summary }}</p>
+            </div>
+        </li>
+        {% endfor %}
+        {% endif %}
+    </ul>
+</div>
 {% endif %}
-<ul>
-    {% if movies %}
-    {% for movie in movies %}
-    <li>
-        <img src="static/images/posters/poster_{{ movie.imdb_id }}.jpg">
-        <h1>{{ movie.title }} ({{ movie.year }})</h1>
-        <p>{{ movie.summary }}</p>
-    </li>
-    {% endfor %}
-    {% endif %}
-</ul>
 {% endblock content %}

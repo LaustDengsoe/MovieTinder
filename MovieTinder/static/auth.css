@@ -1,17 +1,18 @@
-body, html {
+body {
     background-image: url("../static/images/blurred.png");
     background-color: #333;
     font-family: Arial, Helvetica, sans-serif;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     color: white;
     height: 100vh;
     margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    padding-top: 60px;
 }
 
 /* button style for like/dislike*/
@@ -64,7 +65,7 @@ body, html {
 
 /* Style the navbar */
 .navbar {
-    background-color: #33333300; 
+    background-color: black; 
     color: #fff; 
     display: flex;
     position: fixed;
@@ -112,21 +113,57 @@ body, html {
     background-color: #313131;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,8);
-    width: 300px;
+    width: 40%;
     margin-bottom: 16px;
 }
 
 
 
-input[type=text], input[type=password] {
+.input, input[type=text], input[type=password] {
     width: 100%;
     padding: 12px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #cccccc;
     box-sizing: border-box;
     border-radius: 4px;
-    background-color: #fff;
-    color: #333;
 }
 
+.user-list {
+    list-style-type: none;
+    padding: 5px;
+    margin: 5px;
+    flex-direction: column;
+}
+
+.user-item {
+    padding: 3px;
+    margin: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.movie-list {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
+    grid-gap: 20px;
+    padding: 20px;
+    align-items: stretch;
+    flex-direction: column;
+}
+
+.movie-item {
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.movie-item img {
+    width: 100%;
+    height: auto;
+}
+
+.movie-item p {
+    margin: 10px 0;
+}
