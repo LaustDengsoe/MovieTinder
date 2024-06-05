@@ -2,16 +2,21 @@
 {% block content %}
 <p>Home</p>
 
+{% if movie %}
 <img src="{{ image_src }}">
-<h1>{{ movie_title }} ({{ movie_year }})</h1>
-<p>{{ movie_summary }}</p>
-
+<h1>{{ movie.title }} ({{ movie.year }})</h1>
+<p>{{ movie.summary }}</p>
+{% else %}
+<h1>No more movies to like/dislike</h1>
+{% endif %}
 
 <form action="" method="POST">
     {{ form.hidden_tag() }}
+
     <div class="form-group button-group" >
         {{ form.dislike(class="btn btn-outline-info") }}
         {{ form.like(class="btn btn-outline-info") }}
+
     </div>
 </form>
 {% endblock content %}

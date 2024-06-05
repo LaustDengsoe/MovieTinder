@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SearchField
+from wtforms import StringField, PasswordField, SubmitField, SearchField, HiddenField
 from wtforms.validators import DataRequired
 
 class UserLoginForm(FlaskForm):
@@ -29,3 +29,8 @@ class UserMovieReactForm(FlaskForm):
 
 class UserSearchForm(FlaskForm):
     search = SearchField('')
+
+class UserFriendRemoveMatchForm(FlaskForm):
+    user_id = HiddenField()
+    remove = SubmitField('Remove')
+    matches = SubmitField('See matches')
