@@ -20,7 +20,15 @@
 <ul>
     {% if users %}
         {% for user in users %}
-            <li>{{ user[0] }}</li>
+            <li>
+            {{ user.username }}
+            <form action="" method="POST">
+                {{ add_form.hidden_tag() }}
+                <input type="hidden" name="add_id" value="{{ user.id }}">
+                {{ add_form.add() }}
+            </form>
+            </li>
+
         {% endfor %}
     {% else %}
         <li>No users found</li>
@@ -31,13 +39,14 @@
 <ul>
     {% if friends %}
     {% for friend in friends %}
-    <li>{{ friend[0] }}</li>
-    <form action="" method="POST">
-        {{ friend_form.hidden_tag() }}
-        {{ friend_form.user_id() }}
-        {{ friend_form.remove() }}
-        {{ friend_form.matches() }}
-    </form>
+    <li>
+        {{ friend.username }}
+        <form action="" method="POST">
+            {{ remove_form.hidden_tag() }}
+            <input type="hidden" name="user_id" value="{{ friend.id }}">
+            {{ remove_form.remove() }}
+        </form>
+    </li>
     {% endfor %}
     {% else %}
     <li>No friends!</li>

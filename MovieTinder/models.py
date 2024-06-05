@@ -7,7 +7,7 @@ class User(tuple, UserMixin):
     def __init__(self, user_data):
         self.id = user_data[0]
         self.username = user_data[1]
-        self.password = user_data[2]
+        self.password = user_data[2] if len(user_data) > 2 else None
 
     def get_id(self):
        return (self.id)
@@ -136,24 +136,77 @@ def insert_Dislike (user_id, movie_id):
 def select_Friends(user_id):
     cur = conn.cursor()
     sql = """
-    SELECT username FROM Users
+    SELECT id, username FROM Users
     WHERE id IN (
         SELECT id2 FROM HasFriends
         WHERE id1 = %s 
+    ) OR id IN (
+        SELECT id1 FROM HasFriends
+        WHERE id2 = %s
     )
     """
-    cur.execute(sql, (user_id,))
-    users = cur.fetchall() if cur.rowcount > 0 else None;
+    cur.execute(sql, (user_id, user_id,))
+    users = [User(row) for row in cur.fetchall()] if cur.rowcount > 0 else None;
     cur.close()
     return users
 
 def select_Users_Search(user_id, regex):
     cur = conn.cursor()
     sql = """
-    SELECT username, id FROM Users
+    SELECT id, username FROM Users
     WHERE username ~ %s AND id != %s
     """
     cur.execute(sql, (regex, user_id,))
-    users = cur.fetchall() if cur.rowcount > 0 else None;
+    users = [User(row) for row in cur.fetchall()] if cur.rowcount > 0 else None;
     cur.close()
     return users
+
+def delete_Friend(user_id, friend_id):
+    cur = conn.cursor()
+    sql = """
+    DELETE FROM HasFriends
+    WHERE (id1 = %s AND id2 = %s)
+    OR (id1 = %s AND id2 = %s)
+    """
+    cur.execute(sql, (user_id, friend_id, friend_id, user_id,))
+    conn.commit()
+    cur.close()
+
+def insert_Friend(user_id, add_id):
+    cur = conn.cursor()
+    sql = """
+    INSERT INTO HasFriends(id1, id2)
+    VALUES (%s, %s)
+    """
+    cur.execute(sql, (user_id, add_id,))
+    conn.commit()
+    cur.close()
+
+def select_Friend(id):
+    cur = conn.cursor()
+    sql = """
+    SELECT id, username FROM Users
+    WHERE id = %s
+    """
+    cur.execute(sql, (id,))
+    friend = User(cur.fetchone()) if cur.rowcount > 0 else None;
+    cur.close()
+    return friend
+
+def select_common_Movies(user_id, friend_id):
+    cur = conn.cursor()
+    sql = """
+    SELECT * FROM Movies
+    WHERE id IN (
+        SELECT movie_id FROM Likes
+        WHERE user_id = %s
+    )
+    AND id IN (
+        SELECT movie_id FROM Likes
+        WHERE user_id = %s
+    )
+    """
+    cur.execute(sql, (user_id, friend_id,))
+    movies = [Movie(row) for row in cur.fetchall()] if cur.rowcount > 0 else None;
+    cur.close()
+    return movies

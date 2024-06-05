@@ -1,9 +1,7 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for, session
-
 from flask_login import login_required, current_user, logout_user
-from MovieTinder.forms import UserChangeNameForm, UserChangePassForm, UserMovieReactForm, UserSearchForm, UserFriendRemoveMatchForm
-from MovieTinder.models import select_User, update_Username, update_Pass, select_new_Movie, insert_Like, select_Friends, select_Users_Search, select_all_liked_movies, insert_Dislike
-
+from MovieTinder.forms import *
+from MovieTinder.models import *
 from MovieTinder import bcrypt
 
 Users = Blueprint('Users', __name__)
@@ -47,22 +45,19 @@ def home():
 
     react_form = UserMovieReactForm()
     if react_form.validate_on_submit():
+        movie_id = request.form.get('movie_id')
         if react_form.like.data:
-            insert_Like(current_user[0], session['movie_id'])
+            insert_Like(current_user[0], movie_id)
         elif react_form.dislike.data:
             insert_Dislike(current_user[0], session['movie_id'])
             
         return redirect(url_for('Users.home'))
 
-    
-    session['movie_id'] = movie.id if movie != None else None
-
     return render_template('home.html', image_src = poster, movie=movie, form = react_form)
 
 @Users.route("/friends", methods=['GET', 'POST'])
 @login_required
-def friends():
-    
+def friends(): 
     search_form = UserSearchForm()
     search_query = request.args.get('search')
     if search_query:
@@ -70,17 +65,42 @@ def friends():
     else:
         users = None
 
-    remove_match_form = UserFriendRemoveMatchForm()
-    if remove_match_form.validate_on_submit():
-        if remove_match_form.remove.data:
-            print(remove_match_form.user_id.data)
-        elif remove_match_form.matches.data:
-            print(f'Matches {remove_match_form.user_id.data}')
+    remove_form = UserRemoveFriendForm()
+    add_form = UserAddFriendForm()
+    if 'form_name' in request.form:
+        if request.form['form_name'] == 'remove_match_form' and remove_form.validate():
+            friend_id = request.form.get('user_id')
+            if remove_form.remove.data:
+                delete_Friend(current_user[0], friend_id)
+            return redirect(url_for('Users.friends'))  
+        
+        elif request.form['form_name'] == 'add_form' and add_form.validate():
+            add_id = request.form.get('add_id')
+            if add_form.add.data:
+                insert_Friend(current_user[0], add_id)
+            return redirect(url_for('Users.friends'))  
 
-        return redirect(url_for('Users.friends'))    
-    
     friends = select_Friends(current_user[0])
-    return render_template('friends.html', friends=friends, form=search_form, users=users, friend_form=remove_match_form)
+    return render_template('friends.html', friends=friends, form=search_form, users=users,
+                           remove_form=remove_form, add_form = add_form)
+
+@Users.route("/matches", methods=['GET', 'POST'])
+@login_required
+def matches():
+    friends = select_Friends(current_user[0])
+    matches_form = UserSeeMatchesForm ()
+    if 'form_name' in request.form:
+        if request.form['form_name'] == 'matches_form' and matches_form.validate():
+            friend_id = request.form.get('user_id')
+            if matches_form.see_matches.data:
+                session['friend'] = select_Friend(friend_id)
+                session['movies'] = select_common_Movies(current_user[0], friend_id)
+            return redirect(url_for('Users.matches'))  
+
+    friend = User(session['friend']) if session.get('friend') != None else None
+    movies = [Movie(movie) for movie in session.get('movies')] if session.get('movies') != None else None
+    return render_template('matches.html', friends=friends, matches_form=matches_form,
+                           match_friend = friend, movies=movies)
 
 @Users.route("/likes", methods=['GET', 'POST'])
 @login_required

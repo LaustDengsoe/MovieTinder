@@ -30,7 +30,14 @@ class UserMovieReactForm(FlaskForm):
 class UserSearchForm(FlaskForm):
     search = SearchField('')
 
-class UserFriendRemoveMatchForm(FlaskForm):
-    user_id = HiddenField()
+class UserRemoveFriendForm(FlaskForm):
+    form_name = HiddenField(default='remove_match_form')
     remove = SubmitField('Remove')
-    matches = SubmitField('See matches')
+
+class UserAddFriendForm(FlaskForm):
+    form_name = HiddenField(default='add_form')
+    add = SubmitField('Add')
+
+class UserSeeMatchesForm(FlaskForm):
+    form_name = HiddenField(default='matches_form')
+    see_matches = SubmitField('See Matches')
