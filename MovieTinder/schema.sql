@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS Movies(
 );
 
 COPY Movies(imdb_id,title,year,summary)
-FROM 'C:\Users\Laust\Postgres Import\movies_shaved.csv'
+FROM 'C:\Users\holge\Documents\Datalogi\DIS\csv_filer\movies_shaved.csv'
 DELIMITER ','
 CSV HEADER;
 
@@ -36,3 +36,9 @@ CREATE TABLE IF NOT EXISTS Likes(
     FOREIGN KEY (movie_id) REFERENCES Movies(id)
 );
 
+CREATE TABLE IF NOT EXISTS Dislikes(
+	user_id INT,
+    movie_id INT,
+    FOREIGN KEY (user_id) REFERENCES Users(id),
+    FOREIGN KEY (movie_id) REFERENCES Movies(id)
+);
