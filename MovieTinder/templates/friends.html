@@ -5,24 +5,42 @@
 <h2>Search Users</h2>
 <form method="get" action="">
     <div class="form-group">
-        {{ form.search.label(class="form-control-label") }}
         {% if form.search.errors %}
-            {{ form.search(class="form-control form-control-lg is-invalid") }}
+            {{ form.search() }}
             <div class="invalid-feedback">
                 {% for error in form.search.errors %}
                     <span>{{ error }}</span>
                 {% endfor %}
             </div>
         {% else %}
-            {{ form.search(class="form-control form-control-lg") }}
+            {{ form.search() }}
         {% endif %}
     </div>
 </form>
+<ul>
+    {% if users %}
+        {% for user in users %}
+            <li>{{ user[0] }}</li>
+        {% endfor %}
+    {% else %}
+        <li>No users found</li>
+    {% endif %}
+</ul>
 
 <h2>All your friends</h2>
 <ul>
+    {% if friends %}
     {% for friend in friends %}
     <li>{{ friend[0] }}</li>
+    <form action="" method="POST">
+        {{ friend_form.hidden_tag() }}
+        {{ friend_form.user_id() }}
+        {{ friend_form.remove() }}
+        {{ friend_form.matches() }}
+    </form>
     {% endfor %}
+    {% else %}
+    <li>No friends!</li>
+    {% endif %}
 </ul>
 {% endblock content %}
