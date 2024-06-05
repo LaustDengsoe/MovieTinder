@@ -6,7 +6,7 @@
     {% if movies %}
     {% for movie in movies %}
     <li>
-        <img src="{{ image_src }}">
+        <img src="/static/images/posters/poster_{{ movie.imdb_id }}.jpg">
         <h1>{{ movie.title }} ({{ movie.year }})</h1>
         <p>{{ movie.summary }}</p>
     </li>
