@@ -164,8 +164,15 @@ def select_Users_Search(user_id, regex):
     sql = """
     SELECT id, username FROM Users
     WHERE username ~ %s AND id != %s
+    AND id NOT IN (
+        SELECT id2 FROM HasFriends
+        WHERE id1 = %s 
+    ) AND id NOT IN (
+        SELECT id1 FROM HasFriends
+        WHERE id2 = %s
+    )
     """
-    cur.execute(sql, (regex, user_id,))
+    cur.execute(sql, (regex, user_id, user_id, user_id,))
     users = [User(row) for row in cur.fetchall()] if cur.rowcount > 0 else None;
     cur.close()
     return users

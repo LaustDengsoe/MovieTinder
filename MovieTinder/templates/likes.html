@@ -2,17 +2,21 @@
 {% block content %}
 <p>Likes</p>
 
-<ul>
-    {% if movies %}
-    {% for movie in movies %}
-    <li>
-        <img src="/static/images/posters/poster_{{ movie.imdb_id }}.jpg">
-        <h1>{{ movie.title }} ({{ movie.year }})</h1>
-        <p>{{ movie.summary }}</p>
-    </li>
-    {% endfor %}
-    {% else %}
-    <li>You have not liked any movies!</li>
-    {% endif %}
-</ul>
+<div class="container">
+    <ul class="movie-list">
+        {% if movies %}
+        {% for movie in movies %}
+        <li>
+            <div class="movie-item">
+                <img src="/static/images/posters/poster_{{ movie.imdb_id }}.jpg">
+                <p>{{ movie.title }} ({{ movie.year }})</p>
+                <p>{{ movie.summary }}</p>
+            </div>
+        </li>
+        {% endfor %}
+        {% else %}
+        <li>You have not liked any movies!</li>
+        {% endif %}
+    </ul>
+</div>
 {% endblock content %}

@@ -49,7 +49,7 @@ def home():
         if react_form.like.data:
             insert_Like(current_user[0], movie_id)
         elif react_form.dislike.data:
-            insert_Dislike(current_user[0], session['movie_id'])
+            insert_Dislike(current_user[0], movie_id)
             
         return redirect(url_for('Users.home'))
 
