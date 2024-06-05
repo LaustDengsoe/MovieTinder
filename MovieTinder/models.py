@@ -45,7 +45,16 @@ def load_user(id):
     else:
         return None
 
-    
+def select_User(username):
+    cur = conn.cursor()
+    sql = """
+    SELECT * FROM Users
+    WHERE username = %s
+    """
+    cur.execute(sql, (username,))
+    user = User(cur.fetchone()) if cur.rowcount > 0 else None;
+    cur.close()
+    return user
 
 def insert_User(username, password):
     cur = conn.cursor()
