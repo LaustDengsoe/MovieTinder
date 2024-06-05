@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Movies(
 
 COPY Movies(imdb_id,title,year,summary)
 
-FROM '/Users/mikkelkongsgaard/Desktop/DIKU/DIS/afleveringer/projekt/git/MovieTinder/MovieTinder/static/movies_shaved.csv'
+FROM 'C:\Users\Laust\Postgres Import\movies_shaved.csv'
 
 DELIMITER ','
 CSV HEADER;
