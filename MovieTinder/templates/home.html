@@ -12,12 +12,11 @@
 
 <form action="" method="POST">
     {{ form.hidden_tag() }}
-    <div>
-        {{ form.like() }}
-    </div>
 
-    <div>
-        {{ form.dislike() }}
+    <div class="form-group button-group" >
+        {{ form.dislike(class="btn btn-outline-info") }}
+        {{ form.like(class="btn btn-outline-info") }}
+
     </div>
 </form>
 {% endblock content %}

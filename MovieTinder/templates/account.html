@@ -35,8 +35,10 @@
             {% endif %}
         </div>
 
-        <div>
-            {{ username_form.submit() }}
+
+        <div class="form-group">
+            {{ username_form.submit(class="btn btn-outline-account") }}
+
         </div>
     </div>
 </form>
@@ -73,8 +75,10 @@
             {% endif %}
         </div>
 
-        <div>
-            {{ pass_form.submit() }}
+
+        <div class="form-group">
+            {{ pass_form.submit(class="btn btn-outline-account") }}
+
         </div>
     </div>
 </form>

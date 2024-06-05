@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for, session
+
 from flask_login import login_required, current_user, logout_user
 from MovieTinder.forms import UserChangeNameForm, UserChangePassForm, UserMovieReactForm, UserSearchForm, UserFriendRemoveMatchForm
 from MovieTinder.models import select_User, update_Username, update_Pass, select_new_Movie, insert_Like, select_Friends, select_Users_Search, select_all_liked_movies, insert_Dislike
+
 from MovieTinder import bcrypt
 
 Users = Blueprint('Users', __name__)

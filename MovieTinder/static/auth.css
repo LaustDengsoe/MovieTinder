@@ -1,0 +1,132 @@
+body, html {
+    background-image: url("../static/images/blurred.png");
+    background-color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* button style for like/dislike*/
+.btn.btn-outline-info {
+    background-color: #ff4500;
+    color: white;
+    padding: 14px 20px;
+    margin: 30px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; 
+}
+
+/* account buttons */
+.btn.btn-outline-account{
+    background-color: #ff4500;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; 
+
+}
+/* account buttons hover */
+.btn.btn-outline-account:hover {
+    background-color: #e63900;
+}
+
+
+/* Style the button group */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Change the color of the like/dislike buttons on hover */
+.btn.btn-outline-info:hover {
+    background-color: #e63900;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Style the navbar */
+.navbar {
+    background-color: #33333300; 
+    color: #fff; 
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Style the navbar brand */
+.navbar-brand {
+    color: #fff; 
+}
+
+
+/* Style the navbar links */
+.navbar-nav .nav-link {
+    color: #fff; 
+    margin: 14 20px;
+    border: 1px solid #fff;
+    padding: 14px 20px;
+    margin: 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    justify-content: center;
+}
+
+
+.navbar-nav .nav-item {
+    list-style-type: none;
+}
+
+/* Change the color of the navbar links on hover */
+.navbar-nav .nav-link:hover {
+    color: #ddd; 
+    background-color: #e63900; 
+}
+
+.container {
+    padding: 20px;
+    background-color: #313131;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,8);
+    width: 300px;
+    margin-bottom: 16px;
+}
+
+
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+}
+
