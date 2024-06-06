@@ -23,15 +23,19 @@
 {% if match_friend %}
 <h2>Your matches with {{ match_friend.username }} </h2>
 {% endif %}
+<div class="scrollable-posters">
 <ul>
     {% if movies %}
     {% for movie in movies %}
     <li>
+    <ul class="posters-list" >
         <img src="static/images/posters/poster_{{ movie.imdb_id }}.jpg">
         <h1>{{ movie.title }} ({{ movie.year }})</h1>
         <p>{{ movie.summary }}</p>
+    </ul>
     </li>
     {% endfor %}
     {% endif %}
 </ul>
+</div>
 {% endblock content %}

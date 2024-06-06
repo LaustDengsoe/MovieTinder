@@ -1,4 +1,4 @@
-body, html {
+body {
     background-image: url("../static/images/blurred.png");
     background-color: #333;
     font-family: Arial, Helvetica, sans-serif;
@@ -12,6 +12,19 @@ body, html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+/* title for page */
+p  {
+    color: white;
+    font-size: 25px;
+    margin-top: 100x;
+    align-items: center;
+}
+
+h2 {
+
+    color: white;
+    font-size: 25px;
 }
 
 /* button style for like/dislike*/
@@ -130,3 +143,22 @@ input[type=text], input[type=password] {
     color: #333;
 }
 
+.scrollable-posters {
+    max-height: 85vh; /* adjust this value as needed */
+    overflow-y: auto;
+}
+
+.posters-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scrollable-posters::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* removes dots from scrolling */
+ul {
+    list-style-type: none;
+}
