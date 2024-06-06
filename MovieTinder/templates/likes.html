@@ -10,7 +10,7 @@
         <li>
             <div class="movie-item">
                 <img src="/static/images/posters/poster_{{ movie.imdb_id }}.jpg">
-                <p>{{ movie.title }} ({{ movie.year }})</p>
+                <h2>{{ movie.title }} ({{ movie.year }})</h2>
                 <p>{{ movie.summary }}</p>
                 <form method="post" action="">
                     <input type="hidden" name="movie_id" value="{{ movie.id }}">
