@@ -16,9 +16,13 @@ def account():
     if username_form.validate_on_submit():
         new_username = username_form.username.data
         new_username_confirmed = username_form.username_confirmed.data
+        pattern = re.compile(r'^[a-zA-Z0-9]+$')
+
         if new_username == new_username_confirmed:
             if select_User(new_username) != None:
                 flash('Username is already taken!', 'danger')
+            elif not pattern.match(new_username):
+                flash('Username can only contain letters and numbers!', 'danger')
             else:
                 update_Username(current_user[0], new_username)
                 flash('Username has been updated!', 'success')
@@ -98,7 +102,7 @@ def matches():
                 session['friend'] = select_Friend(friend_id)
                 session['movies'] = select_common_Movies(current_user[0], friend_id)
                 if session['movies'] == None:
-                    flash(f'You have no matches with {session['friend'].username}!', 'warning')
+                    flash(f"You have no matches with {session['friend'].username}!", 'warning')
             return redirect(url_for('Users.matches'))  
 
     friend = User(session['friend']) if session.get('friend') != None else None

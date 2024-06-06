@@ -1,3 +1,4 @@
+import re
 from flask import Blueprint, render_template, flash, redirect, url_for
 from flask_login import login_user, current_user, logout_user, login_required
 from MovieTinder.forms import UserLoginForm, UserRegisterForm
@@ -34,18 +35,21 @@ def register():
     form = UserRegisterForm()
     if form.validate_on_submit():
         user = select_User(form.username.data)
+        pattern = re.compile(r'^[a-zA-Z0-9]+$')
         if user != None:
             flash('Username already taken!', 'danger')
             user = None
+        elif not pattern.match(form.username.data):
+            flash('Username can only contain letters and numbers!', 'danger')
+            user = None
+        elif form.password.data == form.password_confirmed.data:
+            username = form.username.data
+            password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+            insert_User(username, password)
+            user = select_User(username)
+            login_user(user)
+            return redirect(url_for('Users.home'))
         else:
-            if form.password.data == form.password_confirmed.data:
-                username = form.username.data
-                password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-                insert_User(username, password)
-                user = select_User(username)
-                login_user(user)
-                return redirect(url_for('Users.home'))
-            else:
-                flash('Passwords do not match!', 'danger')
+            flash('Passwords do not match!', 'danger')
 
     return render_template('register.html', form = form)
