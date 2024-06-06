@@ -108,7 +108,7 @@ def select_new_Movie(user_id):
     cur.close()
     return movie
 
-def select_all_liked_movies(user_id):
+def select_all_liked_Movies(user_id):
     cur = conn.cursor()
     sql = """
     SELECT * FROM Movies
@@ -164,8 +164,15 @@ def select_Users_Search(user_id, regex):
     sql = """
     SELECT id, username FROM Users
     WHERE username ~ %s AND id != %s
+    AND id NOT IN (
+        SELECT id2 FROM HasFriends
+        WHERE id1 = %s 
+    ) AND id NOT IN (
+        SELECT id1 FROM HasFriends
+        WHERE id2 = %s
+    )
     """
-    cur.execute(sql, (regex, user_id,))
+    cur.execute(sql, (regex, user_id, user_id, user_id,))
     users = [User(row) for row in cur.fetchall()] if cur.rowcount > 0 else None;
     cur.close()
     return users
@@ -219,3 +226,13 @@ def select_common_Movies(user_id, friend_id):
     movies = [Movie(row) for row in cur.fetchall()] if cur.rowcount > 0 else None;
     cur.close()
     return movies
+
+def delete_Like(user_id, movie_id):
+    cur = conn.cursor()
+    sql = """
+    DELETE FROM Likes
+    WHERE user_id = %s AND movie_id = %s
+    """
+    cur.execute(sql, (user_id, movie_id,))
+    conn.commit()
+    cur.close()

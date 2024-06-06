@@ -41,3 +41,7 @@ class UserAddFriendForm(FlaskForm):
 class UserSeeMatchesForm(FlaskForm):
     form_name = HiddenField(default='matches_form')
     see_matches = SubmitField('See Matches')
+
+class UserRemoveLikeForm(FlaskForm):
+    form_name = HiddenField(default='remove_match_form')
+    remove_like = SubmitField('Remove like')

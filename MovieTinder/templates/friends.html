@@ -3,53 +3,64 @@
 <p>Friends</p>
 
 <h2>Search Users</h2>
-<form method="get" action="">
-    <div class="form-group">
-        {% if form.search.errors %}
-            {{ form.search() }}
-            <div class="invalid-feedback">
-                {% for error in form.search.errors %}
-                    <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-        {% else %}
-            {{ form.search() }}
-        {% endif %}
-    </div>
-</form>
-<ul>
-    {% if users %}
-        {% for user in users %}
+<div class="container">
+    <form method="get" action="">
+        <div class="form-group">
+            {% if form.search.errors %}
+                {{ form.search() }}
+                <div class="invalid-feedback">
+                    {% for error in form.search.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.search(class="input") }}
+            {% endif %}
+        </div>
+    </form>
+    <ul class="user-list">
+        {% if users %}
+            {% for user in users %}
             <li>
-            {{ user.username }}
-            <form action="" method="POST">
-                {{ add_form.hidden_tag() }}
-                <input type="hidden" name="add_id" value="{{ user.id }}">
-                {{ add_form.add() }}
-            </form>
+                <div class="user-item">
+                    <span>
+                        {{ user.username }}
+                    </span>
+                    <form action="" method="POST">
+                        {{ add_form.hidden_tag() }}
+                        <input type="hidden" name="add_id" value="{{ user.id }}">
+                        {{ add_form.add(class="btn btn-outline") }}
+                    </form>
+                </div>
             </li>
-
-        {% endfor %}
-    {% else %}
-        <li>No users found</li>
-    {% endif %}
-</ul>
+            {% endfor %}
+        {% else %}
+            <li>No users found</li>
+        {% endif %}
+    </ul>
+</div>
 
 <h2>All your friends</h2>
-<ul>
-    {% if friends %}
-    {% for friend in friends %}
-    <li>
-        {{ friend.username }}
-        <form action="" method="POST">
-            {{ remove_form.hidden_tag() }}
-            <input type="hidden" name="user_id" value="{{ friend.id }}">
-            {{ remove_form.remove() }}
-        </form>
-    </li>
-    {% endfor %}
-    {% else %}
-    <li>No friends!</li>
-    {% endif %}
-</ul>
+<div class="container">
+    <ul class="user-list">
+        {% if friends %}
+        {% for friend in friends %}
+        <li>
+            <div class="user-item">
+                <span>
+                    {{ friend.username }}
+                </span>
+                <form action="" method="POST">
+                    {{ remove_form.hidden_tag() }}
+                    <input type="hidden" name="user_id" value="{{ friend.id }}">
+                    {{ remove_form.remove(class="btn btn-outline") }}
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+        {% else %}
+        <li>No friends!</li>
+        {% endif %}
+    </ul>
+</div>
 {% endblock content %}
