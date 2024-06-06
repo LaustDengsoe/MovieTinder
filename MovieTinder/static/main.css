@@ -2,6 +2,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .register {
     background-image: url("../static/images/blurred.png");
@@ -169,3 +170,46 @@ a:hover {
     background-color: #444;
 }
 
+/* Flash message container */
+#flash-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: auto;
+    z-index: 1000;
+  }
+  
+  /* Flash message styling */
+  .flash-message {
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Category-based styles */
+  .alert-success {
+    background-color: #28a745;
+  }
+  
+  .alert-danger {
+    background-color: #dc3545;
+  }
+  
+  .alert-warning {
+    background-color: #ffc107;
+    color: #212529;
+  }
+  
+  .alert-info {
+    background-color: #17a2b8;
+  }
+  
+  /* Additional styles */
+  .alert {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+  }

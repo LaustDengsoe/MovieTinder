@@ -7,7 +7,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: white;
-    height: 100vh;
+    height: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -15,21 +15,8 @@ body {
     padding-top: 60px;
 }
 
-/* button style for like/dislike*/
-.btn.btn-outline-info {
-    background-color: #ff4500;
-    color: white;
-    padding: 14px 20px;
-    margin: 30px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    border-radius: 4px;
-    transition: background-color 0.3s ease; 
-}
-
-/* account buttons */
-.btn.btn-outline-account{
+/* button style*/
+.btn.btn-outline {
     background-color: #ff4500;
     color: white;
     padding: 14px 20px;
@@ -38,13 +25,12 @@ body {
     width: 100%;
     border-radius: 4px;
     transition: background-color 0.3s ease; 
-
 }
-/* account buttons hover */
-.btn.btn-outline-account:hover {
+
+/* Change the color of the like/dislike buttons on hover */
+.btn.btn-outline:hover {
     background-color: #e63900;
 }
-
 
 /* Style the button group */
 .button-group {
@@ -52,9 +38,8 @@ body {
     justify-content: space-between;
 }
 
-/* Change the color of the like/dislike buttons on hover */
-.btn.btn-outline-info:hover {
-    background-color: #e63900;
+.button-group-item {
+    margin: 30px;
 }
 
 .navbar-nav {
@@ -73,30 +58,17 @@ body {
     left: 0;
     right: 0;
     width: 100%;
-    z-index: 1000;
 }
-
-/* Style the navbar brand */
-.navbar-brand {
-    color: #fff; 
-}
-
 
 /* Style the navbar links */
 .navbar-nav .nav-link {
     color: #fff; 
-    margin: 14 20px;
-    border: 1px solid #fff;
     padding: 14px 20px;
-    margin: 30px;
-    border: none;
     cursor: pointer;
-    border-radius: 4px;
     transition: background-color 0.3s ease;
     text-decoration: none;
     justify-content: center;
 }
-
 
 .navbar-nav .nav-item {
     list-style-type: none;
@@ -108,6 +80,10 @@ body {
     background-color: #e63900; 
 }
 
+.navbar-text {
+    font-weight: bold;
+}
+
 .container {
     padding: 20px;
     background-color: #313131;
@@ -116,8 +92,6 @@ body {
     width: 40%;
     margin-bottom: 16px;
 }
-
-
 
 .input, input[type=text], input[type=password] {
     width: 100%;
@@ -167,3 +141,48 @@ body {
 .movie-item p {
     margin: 10px 0;
 }
+
+/* Flash message container */
+#flash-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: auto;
+    z-index: 1000;
+  }
+  
+  /* Flash message styling */
+  .flash-message {
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Category-based styles */
+  .alert-success {
+    background-color: #28a745;
+  }
+  
+  .alert-danger {
+    background-color: #dc3545;
+  }
+  
+  .alert-warning {
+    background-color: #ffc107;
+    color: #212529;
+  }
+  
+  .alert-info {
+    background-color: #17a2b8;
+  }
+  
+  /* Additional styles */
+  .alert {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
