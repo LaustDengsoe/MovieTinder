@@ -11,6 +11,11 @@
                 <img src="/static/images/posters/poster_{{ movie.imdb_id }}.jpg">
                 <p>{{ movie.title }} ({{ movie.year }})</p>
                 <p>{{ movie.summary }}</p>
+                <form method="post" action="">
+                    <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                    {{ remove_like_form.hidden_tag() }}
+                    {{ remove_like_form.remove_like(class="btn btn-outline") }}
+                </form>
             </div>
         </li>
         {% endfor %}

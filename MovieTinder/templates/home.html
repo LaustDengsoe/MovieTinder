@@ -14,8 +14,12 @@
     {{ form.hidden_tag() }}
     <input type="hidden" name="movie_id" value="{{ movie.id }}">
     <div class="form-group button-group" >
-        {{ form.dislike(class="btn btn-outline-info") }}
-        {{ form.like(class="btn btn-outline-info") }}
+        <div class="button-group-item">
+            {{ form.dislike(class="btn btn-outline") }}
+        </div>
+        <div class="button-group-item">
+            {{ form.like(class="btn btn-outline") }}
+        </div>
     </div>
 </form>
 {% endblock content %}
