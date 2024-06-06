@@ -3,7 +3,7 @@
 ## What is this?
 This is MovieTinder, you create an a account, login in, at the homepage movies will be represented to you and you can like or dislike them. In the top action bar you can see your liked movies under 'Likes', you can add or remove friends (other accounts created on you local machine) under 'Friends', change your account details under 'Account', logout and see which movies both you and your friends like under 'Matches'. This should hopefully make it easier to pick a movie with your friend or partner whenever you don't know what to watch!
 
-The E/R diagram for the project is in the top directory and it is named 'MovieTinder - ER model.drawio.png'. You can also see it below.
+The E/R diagram for the project is in the top directory and it is named 'MovieTinder_ER.drawio.png'. You can also see it below.
 
 ![image](MovieTinder_ER.drawio.png)
 
