@@ -24,7 +24,7 @@ Make sure to be inside the folder inner most MovieTinder folder.
 
 To use the example accounts we have made run the following command in terminal:
 ```
- psql -d site -U postgres -W -f .\schema_ins.sql
+ psql -d site -U {user} -W -f .\schema_ins.sql
  ```
  While still inside the innermost MovieTinder folder.
 
